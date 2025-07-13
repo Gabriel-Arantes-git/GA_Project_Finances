@@ -1,14 +1,13 @@
 # 🗄️ Banco de Dados – GA_Project
 
-Este documento descreve a estrutura e os objetivos do banco de dados utilizado no sistema GA_Project. Ele serve como referência técnica para desenvolvedores e DBAs.
-
+Este documento descreve a estrutura do banco de dados em *PostgreSQL* e os objetivos utilizados no sistema GA_Project. 
 ---
 
 ## 📐 Diagrama ER
 
 Abaixo, a estrutura relacional do banco, modelada no DBeaver:
 
-![Diagrama ER](../Captura%20de%20tela%202025-07-13%20143503.png)
+<img width="1912" height="910" alt="Captura de tela 2025-07-13 143503" src="https://github.com/user-attachments/assets/e68aeb5e-d21f-41f6-9910-319c1110fe19" />
 
 ---
 
