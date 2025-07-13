@@ -1,0 +1,43 @@
+# 🗄️ Banco de Dados – GA_Project
+
+Este documento descreve a estrutura e os objetivos do banco de dados utilizado no sistema GA_Project. Ele serve como referência técnica para desenvolvedores e DBAs.
+
+---
+
+## 📐 Diagrama ER
+
+Abaixo, a estrutura relacional do banco, modelada no DBeaver:
+
+![Diagrama ER](../Captura%20de%20tela%202025-07-13%20143503.png)
+
+---
+
+## 📁 Estrutura de Schemas
+
+O banco está organizado em múltiplos schemas:
+
+- **`usuario`**: gerenciamento de usuários, autenticação e tokens.
+- **`financeiro`**: controle de transações, parcelas e categorização financeira.
+
+---
+
+## 🧱 Principais Tabelas
+
+### 🔐 Autenticação e Perfis (`usuario`)
+- `credencial`: armazena email, senha hash, login ativo e timestamps.
+- `token_recuperacao`: tokens de redefinição de senha, com expiração, IP e controle de uso.
+- `usuario`: metadados do usuário e vínculo com a credencial.
+- `tipo_usuario`: enum de perfis (admin, comum etc.).
+
+### 💰 Gestão Financeira (`financeiro`)
+- `transacao`: valor, data, descrição e vínculos com categoria, tipo, prioridade e compra.
+- `categoria`: agrupamento de transações, vinculado a um `tipo_categoria`.
+- `tipo_transacao`, `tipo_compra`, `nivel_prioridade`: enums.
+- `tpl_transacao_usuario`: associação N:N entre usuários e transações.
+
+### 📅 Parcelamento
+- `parcela`: valor, data de vencimento, status e pagamento efetivo.
+- `status_pagamento`: enum de status (pago, pendente, atrasado...).
+- `tpl_parcela_transacao`: ligação entre parcelas e transações.
+
+---
