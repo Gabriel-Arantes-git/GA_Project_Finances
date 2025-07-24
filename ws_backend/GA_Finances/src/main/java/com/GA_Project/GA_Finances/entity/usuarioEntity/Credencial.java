@@ -1,23 +1,20 @@
-package com.GA_Project.GA_Finances.entity;
+package com.GA_Project.GA_Finances.entity.usuarioEntity;
 
+import com.GA_Project.GA_Finances.entity.EntidadePadrao;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Table(name = "credencial")
 @Entity
-@NoArgsConstructor
-@Getter
-@Setter
-public class Credencial {
+@Data
+public class Credencial implements EntidadePadrao {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "credencial_seq")
+    @SequenceGenerator(name = "credencial_seq",sequenceName = "credencial_idkey_seq",allocationSize = 1)
     private Long idkey;
 
     @Column(name = "email")
@@ -27,10 +24,10 @@ public class Credencial {
     private String senha;
 
     @Column(name = "ultimo_login")
+    @CreationTimestamp
     private LocalDateTime ultimo_login;
 
     @Column(name = "ativo")
-    @CreationTimestamp
     private Boolean ativo;
 
 }
