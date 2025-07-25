@@ -41,7 +41,7 @@ public class Transacao implements EntidadePadrao {
     @JoinColumn(name = "idkey_nivel_prioridade",nullable = false)
     private NivelPrioridade nivelPrioridade;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(name = "tpl_parcela_transacao",
             joinColumns = @JoinColumn(name = "idkey_transacao"),
             inverseJoinColumns = @JoinColumn(name = "idkey_parcela")

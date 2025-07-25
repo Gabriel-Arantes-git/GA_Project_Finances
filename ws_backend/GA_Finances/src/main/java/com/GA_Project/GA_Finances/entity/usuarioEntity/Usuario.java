@@ -27,7 +27,7 @@ public class Usuario implements EntidadePadrao {
     @JoinColumn(name = "idkey_tipo_usuario",nullable = false)
     private TipoUsuario tipoUsuario;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(name = "tpl_transacao_usuario",
         joinColumns = @JoinColumn(name = "idkey_usuario"),
         inverseJoinColumns = @JoinColumn(name = "idkey_transacao")
