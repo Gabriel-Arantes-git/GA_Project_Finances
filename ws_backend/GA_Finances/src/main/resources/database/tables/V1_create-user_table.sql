@@ -29,8 +29,8 @@ CREATE TABLE usuario.tipo_usuario (
 );
 
 INSERT INTO usuario.tipo_usuario (descricao) VALUES
-('Administrador'),
-('Usuário Padrão');
+('ADMIN'),
+('USER');
 
 CREATE TABLE usuario.usuario (
 	idkey serial4 NOT NULL,

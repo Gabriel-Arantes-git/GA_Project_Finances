@@ -4,13 +4,17 @@ import com.GA_Project.GA_Finances.entity.EntidadePadrao;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
 
-@Table(name = "credencial")
+@Table(name = "credencial",schema = "usuario")
 @Entity
 @Data
-public class Credencial implements EntidadePadrao {
+public class Credencial implements EntidadePadrao, UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "credencial_seq")
@@ -30,4 +34,18 @@ public class Credencial implements EntidadePadrao {
     @Column(name = "ativo")
     private Boolean ativo;
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public String getPassword() {
+        return senha;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
 }

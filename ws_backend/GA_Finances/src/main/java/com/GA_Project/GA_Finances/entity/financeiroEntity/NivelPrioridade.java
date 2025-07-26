@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Table(name = "nivel_prioridade")
+@Table(name = "nivel_prioridade",schema = "financeiro")
 @Data
 @Entity
 @NoArgsConstructor

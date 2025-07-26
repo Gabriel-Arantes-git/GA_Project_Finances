@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import java.util.List;
 
-@Table(name = "usuario")
+@Table(name = "usuario",schema = "usuario")
 @Entity
 @Data
 public class Usuario implements EntidadePadrao {
