@@ -2,14 +2,15 @@ package com.GA_Project.GA_Finances.entity.usuarioEntity;
 
 import com.GA_Project.GA_Finances.entity.EntidadePadrao;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 @Table(name = "tipo_usuario",schema = "usuario")
 @Entity
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 public class TipoUsuario implements EntidadePadrao {
 
     @Id

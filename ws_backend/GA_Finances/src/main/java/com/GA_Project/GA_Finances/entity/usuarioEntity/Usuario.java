@@ -3,12 +3,18 @@ package com.GA_Project.GA_Finances.entity.usuarioEntity;
 import com.GA_Project.GA_Finances.entity.EntidadePadrao;
 import com.GA_Project.GA_Finances.entity.financeiroEntity.Transacao;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 
 @Table(name = "usuario",schema = "usuario")
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 public class Usuario implements EntidadePadrao {
 
     @Id

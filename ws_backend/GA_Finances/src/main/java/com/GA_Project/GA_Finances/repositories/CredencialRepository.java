@@ -9,8 +9,8 @@ import java.util.Optional;
 
 public interface CredencialRepository extends JpaRepository<Credencial,Long> {
 
-    Optional<UserDetails> procurarPorEmail(String email);
+    Optional<UserDetails> findByEmail(String email);
 
     @Transactional
-    void deletarPorEmail(String email);
+    void deleteByEmail(String email);
 }

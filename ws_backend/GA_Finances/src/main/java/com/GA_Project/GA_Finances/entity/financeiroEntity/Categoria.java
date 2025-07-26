@@ -3,11 +3,12 @@ package com.GA_Project.GA_Finances.entity.financeiroEntity;
 import com.GA_Project.GA_Finances.entity.EntidadePadrao;
 import com.GA_Project.GA_Finances.entity.usuarioEntity.Usuario;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Table(name = "categoria",schema = "financeiro")
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 @Entity
 @NoArgsConstructor
 public class Categoria implements EntidadePadrao {

@@ -2,12 +2,13 @@ package com.GA_Project.GA_Finances.entity.financeiroEntity;
 
 import com.GA_Project.GA_Finances.entity.EntidadePadrao;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Table(name = "tipo_categoria",schema = "financeiro")
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 @Entity
 public class TipoCategoria implements EntidadePadrao {
 

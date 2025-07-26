@@ -21,13 +21,13 @@ public class CredencialService {
 
     public UserDetails procurarUsuarioPorEmail(String email){
 
-        return repository.procurarPorEmail(email).orElseThrow(
+        return repository.findByEmail(email).orElseThrow(
                 () -> new RuntimeException("Email Não Encontrado")
         );
     }
 
     public void deletarUsuarioPorEmail(String email){
-        repository.deletarPorEmail(email);
+        repository.deleteByEmail(email);
     }
 
     public void atualizarUsuarioPorEmail(String email){
