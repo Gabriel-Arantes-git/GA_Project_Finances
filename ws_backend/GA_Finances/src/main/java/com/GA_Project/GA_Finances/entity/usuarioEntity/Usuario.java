@@ -3,11 +3,11 @@ package com.GA_Project.GA_Finances.entity.usuarioEntity;
 import com.GA_Project.GA_Finances.entity.EntidadePadrao;
 import com.GA_Project.GA_Finances.entity.financeiroEntity.Transacao;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.List;
 
 @Table(name = "usuario",schema = "usuario")
@@ -15,7 +15,8 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Usuario implements EntidadePadrao {
+@Builder
+public class Usuario   {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario_seq")
@@ -39,5 +40,6 @@ public class Usuario implements EntidadePadrao {
         inverseJoinColumns = @JoinColumn(name = "idkey_transacao")
     )
     private List<Transacao> transacoes;
+
 
 }

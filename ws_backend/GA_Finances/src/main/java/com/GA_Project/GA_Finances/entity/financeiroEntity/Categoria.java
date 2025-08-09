@@ -11,7 +11,8 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @NoArgsConstructor
-public class Categoria implements EntidadePadrao {
+@Data
+public class Categoria   {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "categoria_seq")

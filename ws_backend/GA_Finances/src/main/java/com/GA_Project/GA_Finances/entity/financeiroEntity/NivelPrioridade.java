@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @NoArgsConstructor
-public class NivelPrioridade implements EntidadePadrao {
+public class NivelPrioridade   {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "nivelPrioridade_seq")

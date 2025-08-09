@@ -5,22 +5,13 @@ CREATE TABLE usuario.credencial (
 	senha text NOT NULL,
 	ultimo_login timestamp NULL,
 	ativo bool DEFAULT true NULL,
+	ultima_alteracao timestamp NULL,
+	token_recuperacao text NULL,
+    token_criacao timestamp NULL,
 	CONSTRAINT credencial_email_unique UNIQUE (email),
 	CONSTRAINT credencial_idkey PRIMARY KEY (idkey)
 );
 
-CREATE TABLE usuario.token_recuperacao (
-	idkey serial4 NOT NULL,
-	idkey_credencial int4 NOT NULL,
-	"token" uuid NOT NULL,
-	criado_em timestamp DEFAULT CURRENT_TIMESTAMP NULL,
-	expira_em timestamp NOT NULL,
-	usado_em timestamp NULL,
-	ip_origem varchar(50) NULL,
-	CONSTRAINT token_recuperacao_pkey PRIMARY KEY (idkey),
-	CONSTRAINT token_recuperacao_token_unique UNIQUE (token),
-	CONSTRAINT token_recuperacao_idkey_credencial_fkey FOREIGN KEY (idkey_credencial) REFERENCES usuario.credencial(idkey)
-);
 
 CREATE TABLE usuario.tipo_usuario (
 	idkey serial4 NOT NULL,

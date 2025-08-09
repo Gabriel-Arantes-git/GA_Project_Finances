@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class TipoCompra implements EntidadePadrao {
+public class TipoCompra   {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "tipoCompra_seq")

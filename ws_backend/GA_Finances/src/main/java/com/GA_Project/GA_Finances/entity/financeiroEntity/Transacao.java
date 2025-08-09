@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Transacao implements EntidadePadrao {
+public class Transacao   {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "transacao_seq")
@@ -42,11 +42,5 @@ public class Transacao implements EntidadePadrao {
     @JoinColumn(name = "idkey_nivel_prioridade",nullable = false)
     private NivelPrioridade nivelPrioridade;
 
-    @ManyToMany
-    @JoinTable(name = "tpl_parcela_transacao",
-            joinColumns = @JoinColumn(name = "idkey_transacao"),
-            inverseJoinColumns = @JoinColumn(name = "idkey_parcela")
-    )
-    private List<Parcela> parcelas;
 
 }

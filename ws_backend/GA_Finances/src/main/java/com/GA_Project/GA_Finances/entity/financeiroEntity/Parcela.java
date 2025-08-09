@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @NoArgsConstructor
-public class Parcela implements EntidadePadrao {
+public class Parcela   {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "parcela_seq")
@@ -27,8 +27,12 @@ public class Parcela implements EntidadePadrao {
 
     private Double valor;
 
+    @OneToOne
     @JoinColumn(name = "idkey_status_pagamento",nullable = false)
     private StatusPagamento statusPagamento;
 
+    @ManyToOne
+    @JoinColumn(name = "idkey_transacao",nullable = false)
+    private Transacao transacao;
 
 }

@@ -11,7 +11,7 @@ import lombok.*;
 @Getter
 @Setter
 @AllArgsConstructor
-public class TipoUsuario implements EntidadePadrao {
+public class TipoUsuario   {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tipoUsuario_seq")

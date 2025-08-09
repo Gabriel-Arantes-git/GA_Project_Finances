@@ -2,10 +2,7 @@ package com.GA_Project.GA_Finances.entity.usuarioEntity;
 
 import com.GA_Project.GA_Finances.entity.EntidadePadrao;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,17 +10,20 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 @Table(name = "credencial",schema = "usuario")
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
-public class Credencial implements EntidadePadrao, UserDetails {
+@NoArgsConstructor
+@Builder
+public class Credencial implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "credencial_seq")
-    @SequenceGenerator(name = "credencial_seq",sequenceName = "credencial_idkey_seq",allocationSize = 1)
+    @SequenceGenerator(name = "credencial_seq",sequenceName = "credencial_idkey_seq",allocationSize = 1,schema = "usuario")
     private Long idkey;
 
     @Column(name = "email")
@@ -38,6 +38,15 @@ public class Credencial implements EntidadePadrao, UserDetails {
 
     @Column(name = "ativo")
     private Boolean ativo;
+
+    @Column
+    private LocalDateTime ultima_alteracao;
+
+    @Column(name = "token_recuperacao")
+    private String token;
+
+    @Column(name = "token_criacao")
+    private LocalDateTime tokenCriacao;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
