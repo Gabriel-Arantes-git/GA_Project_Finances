@@ -30,6 +30,14 @@ public class CredencialService {
         );
     }
 
+    public void gerarToken(Credencial dados){
+        Credencial credencial = repository.findByEmail(dados.getEmail()).orElseThrow(() -> new RuntimeException("email invalido"));
+
+        credencial.setToken("1234");
+        credencial.setTokenCriacao(LocalDateTime.now());
+        repository.save(credencial);
+    }
+
     public Credencial login(Credencial dados){
         Credencial credencial = repository.findByEmail(dados.getEmail())
                 .orElseThrow(() -> new RuntimeException("Login ou Senha incorreta"));

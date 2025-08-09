@@ -26,4 +26,10 @@ public class CredencialController {
         Credencial response = credencialService.login(login);
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping("/gerar_token")
+    public ResponseEntity<String>  gerarToken(@RequestBody Credencial login){
+        credencialService.gerarToken(login);
+        return ResponseEntity.ok("token gerado caso email esteja correto");
+    }
 }

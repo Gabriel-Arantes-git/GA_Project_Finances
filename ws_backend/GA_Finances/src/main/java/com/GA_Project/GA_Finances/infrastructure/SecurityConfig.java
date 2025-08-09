@@ -15,10 +15,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        // Certifique-se de que esta é a primeira regra para o endpoint de cadastro
                         .requestMatchers(HttpMethod.POST, "/login/cadastro").permitAll()
                         .requestMatchers(HttpMethod.GET, "/login/logar").permitAll()
-                        // Todas as outras requisições requerem autenticação
+                        .requestMatchers(HttpMethod.POST, "/login/gerar_token").permitAll()
                         .anyRequest().authenticated()
                 )
                 .csrf(csrf -> csrf.disable());
