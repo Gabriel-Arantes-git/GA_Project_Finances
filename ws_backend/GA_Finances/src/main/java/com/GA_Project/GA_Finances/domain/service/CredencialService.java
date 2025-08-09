@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class CredencialService {
@@ -29,11 +30,17 @@ public class CredencialService {
         );
     }
 
-    public Credencial procurarUsuarioPorEmail(String email){
+    public Credencial login(Credencial dados){
+        Credencial credencial = repository.findByEmail(dados.getEmail())
+                .orElseThrow(() -> new RuntimeException("Login ou Senha incorreta"));
 
-        return repository.findByEmail(email).orElseThrow(
-                () -> new RuntimeException("Email Não Encontrado")
-        );
+        if(credencial.getPassword().equals(dados.getPassword())){
+            return credencial;
+        }
+        else{
+            throw new RuntimeException("Login ou Senha incorreta");
+        }
+
     }
 
     @Transactional
@@ -45,8 +52,8 @@ public class CredencialService {
     }
 
     @Transactional
-    public void atualizarEmail(String antigoEmail,String novoEmail){
-        Credencial credencial = procurarUsuarioPorEmail(antigoEmail);
+    public void atualizarEmail(Credencial loginAntigo,String novoEmail){
+        Credencial credencial = login(loginAntigo);
         credencial.setEmail(novoEmail);
         credencial.setUltima_alteracao(LocalDateTime.now());
     }

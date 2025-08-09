@@ -16,8 +16,8 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(authorize -> authorize
                         // Certifique-se de que esta é a primeira regra para o endpoint de cadastro
-                        .requestMatchers(HttpMethod.POST, "/cadastrar").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/cadastrar/{email}").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/login/cadastro").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/login/logar").permitAll()
                         // Todas as outras requisições requerem autenticação
                         .anyRequest().authenticated()
                 )

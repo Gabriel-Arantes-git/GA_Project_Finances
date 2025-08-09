@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/cadastrar")
+@RequestMapping("/login")
 public class CredencialController {
     private final CredencialService credencialService;
 
@@ -15,15 +15,15 @@ public class CredencialController {
         this.credencialService = credencialService;
     }
 
-    @PostMapping
+    @PostMapping("/cadastro")
     public ResponseEntity<Credencial> cadastrarCredencial(@RequestBody Credencial credencial){
         Credencial response = credencialService.salvarCredencial(credencial);
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/{email}")
-    public ResponseEntity<Credencial> buscarPorEmail(@PathVariable String email){
-        Credencial response = credencialService.procurarUsuarioPorEmail(email);
+    @GetMapping("/logar")
+    public ResponseEntity<Credencial> logar(@RequestBody Credencial login){
+        Credencial response = credencialService.login(login);
         return ResponseEntity.ok(response);
     }
 }
