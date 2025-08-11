@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/login")
 public class CredencialController {
     private final CredencialService credencialService;
 
@@ -21,15 +20,23 @@ public class CredencialController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/logar")
+    @GetMapping("/login")
     public ResponseEntity<Credencial> logar(@RequestBody Credencial login){
         Credencial response = credencialService.login(login);
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/gerar_token")
+    //aqui ele vai inserir o email e dar submit para gerar o token
+    @PostMapping("/cadastro/recuperar_senha")
     public ResponseEntity<String>  gerarToken(@RequestBody Credencial login){
         credencialService.gerarToken(login);
         return ResponseEntity.ok("token gerado caso email esteja correto");
+    }
+
+    //aqui ele vai so inserir o token e tchal
+    @GetMapping("/cadastro/validarToken")
+    public ResponseEntity<Credencial> validarToken(@RequestBody Credencial credencial){
+        Credencial response = credencialService.validarToken(credencial);
+        return ResponseEntity.ok(response);
     }
 }

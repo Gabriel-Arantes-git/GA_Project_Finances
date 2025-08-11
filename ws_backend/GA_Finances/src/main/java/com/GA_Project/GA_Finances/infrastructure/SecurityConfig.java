@@ -15,13 +15,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST, "/login/cadastro").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/login/logar").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/login/gerar_token").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/cadastro").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/cadastro/recuperar_senha").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/cadastro/validarToken").permitAll()
                         .anyRequest().authenticated()
                 )
                 .csrf(csrf -> csrf.disable());
-
         return http.build();
     }
 }

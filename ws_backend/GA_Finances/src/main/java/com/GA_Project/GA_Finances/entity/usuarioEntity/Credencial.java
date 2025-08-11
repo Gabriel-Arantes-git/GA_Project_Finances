@@ -1,6 +1,7 @@
 package com.GA_Project.GA_Finances.entity.usuarioEntity;
 
 import com.GA_Project.GA_Finances.entity.EntidadePadrao;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;

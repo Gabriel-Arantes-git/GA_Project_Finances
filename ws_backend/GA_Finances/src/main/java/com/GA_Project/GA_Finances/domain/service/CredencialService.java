@@ -3,9 +3,11 @@ package com.GA_Project.GA_Finances.domain.service;
 import com.GA_Project.GA_Finances.entity.usuarioEntity.Credencial;
 import com.GA_Project.GA_Finances.domain.repositories.CredencialRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -14,10 +16,13 @@ public class CredencialService {
 
     private final CredencialRepository repository;
 
+    private final SecureRandom random = new SecureRandom();
+
     public CredencialService(CredencialRepository repository){
         this.repository = repository;
     }
 
+    @Transactional
     public Credencial salvarCredencial(Credencial login){
         repository.saveAndFlush(login);
         return login;
@@ -30,10 +35,13 @@ public class CredencialService {
         );
     }
 
+    @Transactional
     public void gerarToken(Credencial dados){
         Credencial credencial = repository.findByEmail(dados.getEmail()).orElseThrow(() -> new RuntimeException("email invalido"));
 
-        credencial.setToken("1234");
+        int numero = random.nextInt(1_000_000);
+
+        credencial.setToken(String.format("%06d", numero));
         credencial.setTokenCriacao(LocalDateTime.now());
         repository.save(credencial);
     }
@@ -50,6 +58,22 @@ public class CredencialService {
         }
 
     }
+
+    public Credencial validarToken(Credencial credencialRecuperarSenha) {
+        Credencial dadosCadastrados = repository.findByEmail(credencialRecuperarSenha.getEmail())
+                .orElseThrow(() -> new RuntimeException("Email não encontrado"));
+
+        if (!dadosCadastrados.getToken().equals(credencialRecuperarSenha.getToken())) {
+            throw new RuntimeException("Token inválido");
+        }
+
+        if (dadosCadastrados.getTokenCriacao().plusMinutes(5).isBefore(LocalDateTime.now())) {
+            throw new RuntimeException("Token expirado");
+        }
+
+        return dadosCadastrados;
+    }
+
 
     @Transactional
     public void atualizarSenhaPorToken(String email,String novaSenha){
