@@ -18,6 +18,9 @@ public class CredencialService {
 
     private final SecureRandom random = new SecureRandom();
 
+    @Autowired
+    private EmailService emailService;
+
     public CredencialService(CredencialRepository repository){
         this.repository = repository;
     }
@@ -44,6 +47,8 @@ public class CredencialService {
         credencial.setToken(String.format("%06d", numero));
         credencial.setTokenCriacao(LocalDateTime.now());
         repository.save(credencial);
+
+        emailService.enviarTokenRecuperacao(credencial.getToken(), credencial.getEmail());
     }
 
     public Credencial login(Credencial dados){
