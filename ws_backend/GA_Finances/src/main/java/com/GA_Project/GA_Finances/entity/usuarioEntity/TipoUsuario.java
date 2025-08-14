@@ -1,6 +1,5 @@
 package com.GA_Project.GA_Finances.entity.usuarioEntity;
 
-import com.GA_Project.GA_Finances.entity.EntidadePadrao;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,6 +17,7 @@ public class TipoUsuario   {
     @SequenceGenerator(name = "tipoUsuario_seq",sequenceName = "tipoUsuario_idkey_seq",allocationSize = 1)
     private Long idkey;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "descricao")
     private UserTipo descricao;
 }

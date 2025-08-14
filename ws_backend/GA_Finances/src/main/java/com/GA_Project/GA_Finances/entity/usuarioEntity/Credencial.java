@@ -1,7 +1,5 @@
 package com.GA_Project.GA_Finances.entity.usuarioEntity;
 
-import com.GA_Project.GA_Finances.entity.EntidadePadrao;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -11,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
-import java.util.UUID;
 
 @Table(name = "credencial",schema = "usuario")
 @Entity

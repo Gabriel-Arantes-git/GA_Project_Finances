@@ -19,6 +19,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/cadastro/recuperar_senha").permitAll()
                         .requestMatchers(HttpMethod.GET, "/cadastro/validarToken").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/cadastrar/usuario").permitAll()
                         .anyRequest().authenticated()
                 )
                 .csrf(csrf -> csrf.disable());

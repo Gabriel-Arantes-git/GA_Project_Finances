@@ -2,14 +2,13 @@ package com.GA_Project.GA_Finances.domain.service;
 
 import com.GA_Project.GA_Finances.entity.usuarioEntity.Credencial;
 import com.GA_Project.GA_Finances.domain.repositories.CredencialRepository;
+import com.GA_Project.GA_Finances.entity.usuarioEntity.Usuario;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Service
 public class CredencialService {
@@ -25,17 +24,16 @@ public class CredencialService {
         this.repository = repository;
     }
 
+
     @Transactional
-    public Credencial salvarCredencial(Credencial login){
-        repository.saveAndFlush(login);
-        return login;
-    }
+    public Credencial salvarCredencial(Credencial novaCredencial){
 
-    public Credencial procurarUsuarioPorToken(String token){
+        repository.findByEmail(novaCredencial.getEmail()).ifPresent(credencial -> {
+            throw new IllegalStateException("Email já existente");
+        });
+        novaCredencial.setAtivo(true);
 
-        return repository.findByToken(token).orElseThrow(
-                () -> new RuntimeException("Token Não Encontrado")
-        );
+        return repository.saveAndFlush(novaCredencial);
     }
 
     @Transactional
@@ -51,12 +49,13 @@ public class CredencialService {
         emailService.enviarTokenRecuperacao(credencial.getToken(), credencial.getEmail());
     }
 
-    public Credencial login(Credencial dados){
+    public Usuario login(Credencial dados){
         Credencial credencial = repository.findByEmail(dados.getEmail())
                 .orElseThrow(() -> new RuntimeException("Login ou Senha incorreta"));
 
         if(credencial.getPassword().equals(dados.getPassword())){
-            return credencial;
+            return repository.findUserByIdkeyCredencial(credencial.getIdkey())
+                    .orElseThrow(()-> new RuntimeException("Erro ao encontrar Usuário"));
         }
         else{
             throw new RuntimeException("Login ou Senha incorreta");
@@ -80,18 +79,5 @@ public class CredencialService {
     }
 
 
-    @Transactional
-    public void atualizarSenhaPorToken(String email,String novaSenha){
-        Credencial credencial = procurarUsuarioPorToken(email);
-        credencial.setSenha((novaSenha));//falta criptografia
-        credencial.setUltima_alteracao(LocalDateTime.now());
 
-    }
-
-    @Transactional
-    public void atualizarEmail(Credencial loginAntigo,String novoEmail){
-        Credencial credencial = login(loginAntigo);
-        credencial.setEmail(novoEmail);
-        credencial.setUltima_alteracao(LocalDateTime.now());
-    }
 }

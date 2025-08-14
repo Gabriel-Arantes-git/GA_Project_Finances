@@ -1,8 +1,8 @@
 package com.GA_Project.GA_Finances.domain.controller;
 
 import com.GA_Project.GA_Finances.domain.service.CredencialService;
-import com.GA_Project.GA_Finances.entity.financeiroEntity.Transacao;
 import com.GA_Project.GA_Finances.entity.usuarioEntity.Credencial;
+import com.GA_Project.GA_Finances.entity.usuarioEntity.Usuario;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +21,8 @@ public class CredencialController {
     }
 
     @GetMapping("/login")
-    public ResponseEntity<Credencial> logar(@RequestBody Credencial login){
-        Credencial response = credencialService.login(login);
+    public ResponseEntity<Usuario> logar(@RequestBody Credencial login){
+        Usuario response = credencialService.login(login);
         return ResponseEntity.ok(response);
     }
 

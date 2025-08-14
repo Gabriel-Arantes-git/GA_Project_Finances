@@ -1,11 +1,9 @@
 package com.GA_Project.GA_Finances.entity.financeiroEntity;
 
-import com.GA_Project.GA_Finances.entity.EntidadePadrao;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.time.LocalDateTime;
-import java.util.List;
+
 
 @Table(name = "transacao",schema = "financeiro")
 @Getter
