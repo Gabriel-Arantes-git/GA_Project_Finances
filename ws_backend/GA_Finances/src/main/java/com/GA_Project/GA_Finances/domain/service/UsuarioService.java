@@ -29,4 +29,8 @@ public class UsuarioService {
         usuario.setCredencial(novaCredencial);
         return repository.save(usuario);
     }
+
+    public Usuario buscarUsuarioById(Long id){
+        return repository.findById(id).orElseThrow(()-> new RuntimeException("usuario invalido"));
+    }
 }

@@ -5,6 +5,7 @@ import com.GA_Project.GA_Finances.domain.repositories.CredencialRepository;
 import com.GA_Project.GA_Finances.entity.usuarioEntity.Usuario;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
@@ -14,14 +15,18 @@ import java.time.LocalDateTime;
 public class CredencialService {
 
     private final CredencialRepository repository;
-
+    private final PasswordEncoder passwordEncoder;
     private final SecureRandom random = new SecureRandom();
 
     @Autowired
     private EmailService emailService;
 
-    public CredencialService(CredencialRepository repository){
+    public CredencialService(CredencialRepository repository,
+                             PasswordEncoder passwordEncoder,
+                             EmailService emailService){
+        this.passwordEncoder = passwordEncoder;
         this.repository = repository;
+        this.emailService = emailService;
     }
 
 
@@ -31,9 +36,10 @@ public class CredencialService {
         repository.findByEmail(novaCredencial.getEmail()).ifPresent(credencial -> {
             throw new IllegalStateException("Email já existente");
         });
+        novaCredencial.setSenha(passwordEncoder.encode(novaCredencial.getPassword()));
         novaCredencial.setAtivo(true);
 
-        return repository.saveAndFlush(novaCredencial);
+        return repository.save(novaCredencial);
     }
 
     @Transactional
@@ -50,11 +56,11 @@ public class CredencialService {
     }
 
     public Usuario login(Credencial dados){
-        Credencial credencial = repository.findByEmail(dados.getEmail())
+        Credencial credencialSalva = repository.findByEmail(dados.getEmail())
                 .orElseThrow(() -> new RuntimeException("Login ou Senha incorreta"));
 
-        if(credencial.getPassword().equals(dados.getPassword())){
-            return repository.findUserByIdkeyCredencial(credencial.getIdkey())
+        if(passwordEncoder.matches(dados.getPassword(), credencialSalva.getPassword())){
+            return repository.findUserByIdkeyCredencial(credencialSalva.getIdkey())
                     .orElseThrow(()-> new RuntimeException("Erro ao encontrar Usuário"));
         }
         else{
