@@ -60,4 +60,9 @@ public class Credencial implements UserDetails {
     public String getUsername() {
         return email;
     }
+
+    public Credencial(String email, String senha){
+        this.email = email;
+        this.senha = senha;
+    }
 }

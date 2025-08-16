@@ -1,6 +1,7 @@
 package com.GA_Project.GA_Finances.domain.service;
 
 import com.GA_Project.GA_Finances.domain.repositories.UsuarioRepository;
+import com.GA_Project.GA_Finances.dto.usuario.RequestUsuarioDTO;
 import com.GA_Project.GA_Finances.entity.usuarioEntity.Credencial;
 import com.GA_Project.GA_Finances.entity.usuarioEntity.TipoUsuario;
 import com.GA_Project.GA_Finances.entity.usuarioEntity.UserTipo;
@@ -20,14 +21,15 @@ public class UsuarioService {
     }
 
     @Transactional
-    public Usuario salvarUsuario(Usuario usuario){
-        Credencial novaCredencial = credencialService.salvarCredencial(usuario.getCredencial());
+    public Usuario salvarUsuario(RequestUsuarioDTO usuario){
+        Credencial novaCredencial = credencialService.salvarCredencial(new Credencial(usuario.email(), usuario.senha()));
+        Usuario novoUsuario = new Usuario();
 
-        if (usuario.getTipoUsuario() == null) {
-            usuario.setTipoUsuario(new TipoUsuario((long)2, UserTipo.USER));
-        }
-        usuario.setCredencial(novaCredencial);
-        return repository.save(usuario);
+        novoUsuario.setNome(usuario.nome());
+        novoUsuario.setTipoUsuario(new TipoUsuario((long)2, UserTipo.USER));
+        novoUsuario.setCredencial(novaCredencial);
+
+        return repository.save(novoUsuario);
     }
 
     public Usuario buscarUsuarioById(Long id){
