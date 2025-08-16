@@ -19,7 +19,7 @@ public class CredencialService {
     private final SecureRandom random = new SecureRandom();
 
     @Autowired
-    private EmailService emailService;
+    private final EmailService emailService;
 
     public CredencialService(CredencialRepository repository,
                              PasswordEncoder passwordEncoder,
@@ -84,6 +84,24 @@ public class CredencialService {
         return dadosCadastrados;
     }
 
+    public void alterarSenha(long idkey,String novaSenha){
+        Credencial credencialSalva = repository.findById(idkey)
+                .orElseThrow(()-> new RuntimeException("usuario invalido"));
 
+        credencialSalva.setSenha(passwordEncoder.encode(novaSenha));
+
+        repository.save(credencialSalva);
+
+    }
+
+    public void alterarEmail(long idkey,String novoEmail){
+        Credencial credencialSalva = repository.findById(idkey)
+                .orElseThrow(()-> new RuntimeException("usuario invalido"));
+
+        credencialSalva.setEmail(novoEmail);
+        repository.save(credencialSalva);
+
+
+    }
 
 }

@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface CredencialRepository extends JpaRepository<Credencial,Long> {
 
-
+    Optional<Credencial> findById(Long id);
     Optional<Credencial> findByEmail(String email);
 
     @Query(value = "SELECT * FROM usuario.usuario WHERE idkey_credencial = :credencialId",nativeQuery = true)
