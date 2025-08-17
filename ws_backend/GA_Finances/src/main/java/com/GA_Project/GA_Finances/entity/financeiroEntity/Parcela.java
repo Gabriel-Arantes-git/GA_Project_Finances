@@ -15,7 +15,7 @@ public class Parcela   {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "parcela_seq")
-    @SequenceGenerator(name = "parcela_seq",sequenceName = "parcela_idkey_seq",allocationSize = 1)
+    @SequenceGenerator(name = "parcela_seq",sequenceName = "parcela_idkey_seq",allocationSize = 1,schema = "financeiro")
     private Long idkey;
 
     @Column(name = "numero_parcela")

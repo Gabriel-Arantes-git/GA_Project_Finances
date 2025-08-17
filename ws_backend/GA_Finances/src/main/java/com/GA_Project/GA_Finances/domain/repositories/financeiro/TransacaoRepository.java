@@ -1,4 +1,4 @@
-package com.GA_Project.GA_Finances.domain.repositories;
+package com.GA_Project.GA_Finances.domain.repositories.financeiro;
 
 import com.GA_Project.GA_Finances.entity.financeiroEntity.Transacao;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,14 +1,13 @@
 package com.GA_Project.GA_Finances.domain.controller;
 
 import com.GA_Project.GA_Finances.domain.service.TransacaoService;
+import com.GA_Project.GA_Finances.dto.financeiro.RequestNovaTransacaoDTO;
 import com.GA_Project.GA_Finances.dto.financeiro.ResponseResumoFinanceiroDTO;
 import com.GA_Project.GA_Finances.entity.financeiroEntity.Transacao;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class TransacaoController {
@@ -20,17 +19,23 @@ public class TransacaoController {
     }
 
     @PostMapping("/adicionar_transferencia/{id}")
-    public ResponseEntity<String> adicionarTransferencia(@Param("id") Long idkeyUsuario, @RequestBody Transacao novaTransacao){
-        service.salvarTransacao(idkeyUsuario,novaTransacao);
+    public ResponseEntity<Transacao> adicionarTransferencia(@PathVariable("id") Long idkeyUsuario, @RequestBody RequestNovaTransacaoDTO novaTransacao){
 
-        return ResponseEntity.ok("Transação Salva com Sucesso");
+
+        return ResponseEntity.ok( service.salvarTransacao(idkeyUsuario,novaTransacao));
     }
 
     @GetMapping("/gastos-despesas/{id}")
-    public ResponseEntity<ResponseResumoFinanceiroDTO> verificarGanhosDespesas(@Param("id") Long idkeyUsuario){
+    public ResponseEntity<ResponseResumoFinanceiroDTO> verificarGanhosDespesas(@PathVariable("id") Long idkeyUsuario){
         Double ganho = service.calculoGanhosPorUsuario(idkeyUsuario);
-        Double despesa = service.calculoGanhosPorUsuario(idkeyUsuario);
+        Double despesa = service.calculoDespesasPorUsuario(idkeyUsuario);
         Double saldoFinal = ganho - despesa;
         return ResponseEntity.ok(new ResponseResumoFinanceiroDTO(ganho,despesa,saldoFinal));
+    }
+
+    @GetMapping("usuario/{id}/transacoes")
+    public ResponseEntity<List<Transacao>> buscarTransacoesPorUsuario(@PathVariable("id") Long idkeyUsuario){
+
+        return ResponseEntity.ok(service.buscarTransacaoPorUsuario(idkeyUsuario));
     }
 }

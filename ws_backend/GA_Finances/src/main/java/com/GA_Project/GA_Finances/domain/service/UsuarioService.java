@@ -1,6 +1,6 @@
 package com.GA_Project.GA_Finances.domain.service;
 
-import com.GA_Project.GA_Finances.domain.repositories.UsuarioRepository;
+import com.GA_Project.GA_Finances.domain.repositories.usuario.UsuarioRepository;
 import com.GA_Project.GA_Finances.dto.usuario.RequestUsuarioDTO;
 import com.GA_Project.GA_Finances.entity.usuarioEntity.Credencial;
 import com.GA_Project.GA_Finances.entity.usuarioEntity.TipoUsuario;

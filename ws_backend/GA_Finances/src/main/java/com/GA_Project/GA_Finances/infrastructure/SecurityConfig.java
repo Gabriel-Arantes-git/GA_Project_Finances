@@ -30,6 +30,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/homepage/{id}").permitAll()
                         .requestMatchers(HttpMethod.GET, "/gastos-despesas/{id}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/adicionar_transferencia/{id}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/usuario/{id}/transacoes").permitAll()
                         .anyRequest().authenticated()
                 )
                 .csrf(csrf -> csrf.disable());

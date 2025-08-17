@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-
+import java.util.List;
 
 
 @Table(name = "transacao",schema = "financeiro")
@@ -17,7 +17,7 @@ public class Transacao   {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "transacao_seq")
-    @SequenceGenerator(name = "transacao_seq",sequenceName = "transacao_idkey_seq",allocationSize = 1)
+    @SequenceGenerator(name = "transacao_seq",sequenceName = "transacao_idkey_seq",allocationSize = 1,schema = "financeiro")
     private Long idkey;
 
     private String nome;
@@ -42,5 +42,6 @@ public class Transacao   {
     @JoinColumn(name = "idkey_nivel_prioridade",nullable = false)
     private NivelPrioridade nivelPrioridade;
 
-
+    @OneToMany(mappedBy = "transacao")
+    private List<Parcela> parcelas;
 }

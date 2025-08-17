@@ -1,6 +1,5 @@
 package com.GA_Project.GA_Finances.entity.financeiroEntity;
 
-import com.GA_Project.GA_Finances.entity.EntidadePadrao;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,7 +13,7 @@ public class TipoCategoria   {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "tipoCategoria_seq")
-    @SequenceGenerator(name = "tipoCategoria_seq",sequenceName = "tipoCategoria_idkey_seq",allocationSize = 1)
+    @SequenceGenerator(name = "tipoCategoria_seq",sequenceName = "tipoCategoria_idkey_seq",allocationSize = 1,schema = "financeiro")
     private Long idkey;
 
     @Column(name = "descricao")

@@ -1,7 +1,7 @@
 package com.GA_Project.GA_Finances.domain.service;
 
 import com.GA_Project.GA_Finances.entity.usuarioEntity.Credencial;
-import com.GA_Project.GA_Finances.domain.repositories.CredencialRepository;
+import com.GA_Project.GA_Finances.domain.repositories.usuario.CredencialRepository;
 import com.GA_Project.GA_Finances.entity.usuarioEntity.Usuario;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
