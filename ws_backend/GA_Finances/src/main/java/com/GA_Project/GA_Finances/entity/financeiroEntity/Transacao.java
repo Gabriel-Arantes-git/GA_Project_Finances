@@ -2,7 +2,9 @@ package com.GA_Project.GA_Finances.entity.financeiroEntity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.time.LocalDateTime;
+
+import java.time.LocalDate;
+
 
 
 @Table(name = "transacao",schema = "financeiro")
@@ -22,7 +24,7 @@ public class Transacao   {
 
     private Double valor;
 
-    private LocalDateTime data;
+    private LocalDate data;
 
     @OneToOne
     @JoinColumn(name = "idkey_categoria",nullable = false)

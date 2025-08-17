@@ -37,5 +37,7 @@ public class Usuario   {
     )
     private List<Transacao> transacoes;
 
-
+    public void addTransacao(Transacao transacao){
+        transacoes.add(transacao);
+    }
 }

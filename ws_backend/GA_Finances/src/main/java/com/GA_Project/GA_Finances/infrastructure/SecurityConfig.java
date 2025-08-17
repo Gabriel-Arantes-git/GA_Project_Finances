@@ -28,6 +28,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/cadastro/validarToken").permitAll()
                         .requestMatchers(HttpMethod.POST, "/cadastrar/usuario").permitAll()
                         .requestMatchers(HttpMethod.GET, "/homepage/{id}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/gastos-despesas/{id}").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/adicionar_transferencia/{id}").permitAll()
                         .anyRequest().authenticated()
                 )
                 .csrf(csrf -> csrf.disable());
